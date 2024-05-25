@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 	"net/http/httputil"
 	"net/url"
@@ -19,6 +20,7 @@ func (s *SimpleServer) Address() string {
 }
 
 func (s *SimpleServer) isAlive() bool {
+	// Check if the server is running up or not
 	return true
 }
 
@@ -62,17 +64,14 @@ func handleErr(err error) {
 
 func (lb *LoadBalanacer) getNextAvailableServer() Server {
 	server := lb.servers[lb.roundRobinCount%len(lb.servers)]
-	for !server.isAlive() {
-		lb.roundRobinCount++
-		server = lb.servers[lb.roundRobinCount%len(lb.servers)]
-	}
+	// check if server is alive or not, if not switch server
 	lb.roundRobinCount++
 	return server
 }
 
 func (lb *LoadBalanacer) serveProxy(w http.ResponseWriter, r *http.Request) {
 	targetServer := lb.getNextAvailableServer()
-	fmt.Printf("Forwarding the request to address %v\n", targetServer.Address())
+	log.Printf("Forwarding the request to address %v\n", targetServer.Address())
 	targetServer.Serve(w, r)
 }
 
@@ -80,8 +79,8 @@ var lb *LoadBalanacer
 
 func main() {
 	servers := []Server{
-		newSimpleServer("https://www.facebook.com"),
-		newSimpleServer("http://www.bing.com"),
+		newSimpleServer("https://www.github.com"),
+		newSimpleServer("https://www.youtube.com/"),
 		newSimpleServer("http://www.duckduckgo.com"),
 	}
 

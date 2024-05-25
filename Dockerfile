@@ -1,11 +1,13 @@
-FROM golang
+FROM golang:1.22
 
 WORKDIR /app
 
-COPY ./cmd .
+COPY go.mod .
 
-ENV PORT=8000
+RUN go mod download
 
-EXPOSE 8000
+COPY . .
 
-CMD [ "go","run","main.go" ]
+RUN go build -o main ./cmd/main.go
+
+CMD [ "./main" ]
