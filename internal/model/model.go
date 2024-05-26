@@ -24,6 +24,7 @@ func (lb *LoadBalanacer) getNextAvailableServer() Server {
 	// 	lb.RoundRobinCount++
 	// 	server = lb.Servers[lb.RoundRobinCount%len(lb.Servers)]
 	// }
+
 	lb.RoundRobinCount++
 	return server
 }
