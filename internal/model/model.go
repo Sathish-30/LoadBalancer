@@ -20,10 +20,10 @@ type LoadBalanacer struct {
 func (lb *LoadBalanacer) getNextAvailableServer() Server {
 	server := lb.Servers[lb.RoundRobinCount%len(lb.Servers)]
 	// check if server is alive or not, if not switch server
-	for !server.IsAlive(server.Address()) {
-		lb.RoundRobinCount++
-		server = lb.Servers[lb.RoundRobinCount%len(lb.Servers)]
-	}
+	// for !server.IsAlive(server.Address()) {
+	// 	lb.RoundRobinCount++
+	// 	server = lb.Servers[lb.RoundRobinCount%len(lb.Servers)]
+	// }
 	lb.RoundRobinCount++
 	return server
 }

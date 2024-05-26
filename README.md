@@ -19,6 +19,11 @@ This repository contains a simple load balancer written in Go. The load balancer
 - `(*LoadBalanacer) serveProxy(w http.ResponseWriter, r *http.Request)`: Forwards the incoming request to the selected server.
 - `main()`: Initializes the servers and starts the load balancer.
 
+### Adding Multiple Backend Services
+
+In this setup, we will add three instances of the same backend service image, each running on different ports, and configure the load balancer to distribute requests among these instances.
+
+
 ### Running the Load Balancer
 
 To run the load balancer, you need to have Docker and docker-compose installed. You can update the port in the docker-compose.

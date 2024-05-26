@@ -1,8 +1,33 @@
 version: "3.8"
 services:
-  load-balancer:
+  load_balancer:
     build: .
+    depends_on:
+      - service1
+      - service2
+      - service3
     environment:
       - PORT=8000
     ports:
-      - 8080:8000
+      - 8000:8000
+  service1:
+    image: sathish30/myapp:latest
+    environment:
+      - PORT=8070
+      - MACHINE=1
+    ports:
+      - 8070:8070
+  service2:
+    image: sathish30/myapp:latest
+    environment:
+      - PORT=8080
+      - MACHINE=2
+    ports:
+      - 8080:8080
+  service3:
+    image: sathish30/myapp:latest
+    environment:
+      - PORT=8090
+      - MACHINE=3
+    ports:
+      - 8090:8090

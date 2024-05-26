@@ -1,9 +1,7 @@
 package model
 
 import (
-	"net"
 	"net/http"
-	"time"
 )
 
 type Server interface {
@@ -18,12 +16,12 @@ func (s *SimpleServer) Address() string {
 
 func (s *SimpleServer) IsAlive(addr string) bool {
 	// Check if the server is running up or not
-	timeout := 3 * time.Second
-	conn, err := net.DialTimeout("tcp", addr, timeout)
-	if err != nil {
-		return false
-	}
-	defer conn.Close()
+	// timeout := 5 * time.Second
+	// conn, err := net.DialTimeout("tcp", addr, timeout)
+	// if err != nil {
+	// 	return false
+	// }
+	// defer conn.Close()
 	return true
 }
 
